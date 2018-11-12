@@ -1,0 +1,15 @@
+$main-font: 'Asap', sans-serif;
+$font-color: #fff;
+$font-color-special: #5EBF4E;
+$background: #0D5AA7;
+$middle-place: 0 auto;
+
+@mixin margin-auto {
+    margin: 0 auto;
+    width: 80%;
+}
+
+@mixin fontStyle {
+    font-family: $main-font;
+    color: $font-color;
+}
