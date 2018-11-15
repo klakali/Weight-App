@@ -23,29 +23,49 @@ var textMotivationAll = [
 // END Generate text motivation //
 
 // Add weight //
+var today = new Date();
+var dd = today.getDate();
+var mm = today.getMonth() + 1; //january is 0
+var yr = today.getFullYear();
+
 const button = document.querySelector(".todaysWeight__buttonAdd");
 var allWeightResults = [
     {
+        day: 1,
+        month: 11,
+        year: 2018,
         weight: 79
     },
     {
-        weight: 79
+        day: 2,
+        month: 11,
+        year: 2018,
+        weight: 80
     },
     {
-        weight: 79
+        day: 3,
+        month: 11,
+        year: 2018,
+        weight: 81
     }];
-console.log(allWeightResults[0].weight)
 
 function addWeight() {
     var weightToday = document.querySelector(".todaysWeight__writeWeight");
+
+    let object = {
+        day: dd,
+        month: mm,
+        year: yr,
+        weight: parseInt(weightToday.value)
+    };
+
     if (weightToday.value.length === 0) {
         alert("Please add the weight");
     } else if (weightToday.value <= 69) /*weight to small */ {
-        alert("Hmm, it seems to be incorrect");
+        alert("Hmm, it seems to be incorrect - weight to small");
     } else {
-        allWeightResults.push(parseInt(weightToday.value));
+        allWeightResults.push(object);
         weightToday.value = "";
-
         updateAverageWeight(); //update averageWeight after adding a weight
     }
 }
@@ -54,16 +74,38 @@ button.addEventListener('click', addWeight);
 // END Add weight //
 
 // Weight average //
-function getAverage(a, b) {
-    return a + b;
-}
-
 function updateAverageWeight() {
+    var sumWeight = 0;
+
+    for (let i = 0; i < allWeightResults.length; i++) {
+        sumWeight += allWeightResults[i].weight;
+    }
+
     var weightAverageField = document.querySelector(".weightResult__average");
-    //var weightAverage = (allWeightResults.weight.reduce(getAverage) / allWeightResults.length).toFixed(1);
+    var weightAverage = (sumWeight / allWeightResults.length).toFixed(1);
 
-    // weightAverageField.innerHTML = weightAverage;
+    weightAverageField.innerHTML = weightAverage;
 };
-updateAverageWeight();
 
+updateAverageWeight();
 // END Weight average //
+
+// View all results //
+const viewMoreButton = document.querySelector(".more");
+const allResults = document.querySelector(".allResults");
+console.log(allResults)
+
+function viewMore() {
+    for (let i = 0; i < allWeightResults.length; i++) {
+        var todayFull = dd + "/" + mm + "/" + yr + ": " + allWeightResults[i].weight;
+        var singleWeightResultElement = document.createElement("p");
+        var singleWeightResultText = document.createTextNode(todayFull);
+
+        singleWeightResultElement.appendChild(singleWeightResultText);
+        allResults.appendChild(singleWeightResultElement);
+
+        console.log(todayFull)
+    }
+}
+viewMoreButton.addEventListener('click', viewMore);
+// END view all results //
