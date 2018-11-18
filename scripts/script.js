@@ -1,111 +1,50 @@
-// Generate text motivation //
-var textMotivation = document.querySelector(".welcome__motivationalText");
+<!DOCTYPE html>
+<html>
 
-var textMotivationAll = [
-    "So it goes.",
-    "Everything happens for a reason.",
-    "Try and fail, but never fail to try.",
-    "Life is like riding a bicycle. To keep your balance you must keep moving.",
-    "If you dream it, you can do it.",
-    "Never, never, never give up.",
-    "Don’t wait. The time will never be just right.",
-    "Do what you can, with what you have, where you are.",
-    "Action is the foundational key to all success.",
-    "Don’t regret the past, just learn from it.",
-    "Believe you can and you’re halfway there.",
-    "To be the best, you must be able to handle the worst."
-];
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weight App</title>
+    <meta name="description" content="Track the weight">
+    <meta name="author" content="klakali">
+    <link href="https://fonts.googleapis.com/css?family=Asap:400,500i,600" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="dist/style.css">
+</head>
 
-(function motivationGenerated() {
-    let quoteForToday = textMotivationAll[Math.floor(Math.random() * textMotivationAll.length)]
-    textMotivation.innerHTML = quoteForToday;
-})();
-// END Generate text motivation //
+<body>
+    <header class="welcome">
+        <h1 class="welcome__welcomeText">Hello, Andrzej.</h1>
+        <h2 class="welcome__motivationalText">text...</h2>
+    </header>
 
-// Add weight //
-var today = new Date();
-var dd = today.getDate();
-var mm = today.getMonth() + 1; //january is 0
-var yr = today.getFullYear();
+    <section class="todaysWeight">
+        <h3 class="todaysWeight__addWeightText">Today's results:</h3>
+        <form>
+            <input class="todaysWeight__writeWeight" type="text" placeholder="Weight...">
+            <input class="todaysWeight__buttonAdd" type="button" value="Add">
+        </form>
+    </section>
 
-const button = document.querySelector(".todaysWeight__buttonAdd");
-var allWeightResults = [
-    {
-        day: 1,
-        month: 11,
-        year: 2018,
-        weight: 79
-    },
-    {
-        day: 2,
-        month: 11,
-        year: 2018,
-        weight: 80
-    },
-    {
-        day: 3,
-        month: 11,
-        year: 2018,
-        weight: 81
-    }];
+    <section class="weightResult">
+        <p>Average weight from 30 days: <span class="weightResult__average">75</span> kg</p>
+    </section>
 
-function addWeight() {
-    var weightToday = document.querySelector(".todaysWeight__writeWeight");
+    <section class="weightGraph">
+        <div class="weightGraph__30Days"></div>
+    </section>
 
-    let object = {
-        day: dd,
-        month: mm,
-        year: yr,
-        weight: parseInt(weightToday.value)
-    };
+    <section class="moreResults">
+        <p class="moreResults__addprevious">Add previous results</p>
+        <form class="previousWeight__form">
+            <input class="previousWeight__writeWeight" type="text" placeholder="Weight...">
+            <input class="previousWeight__dateWeight" type="date" required>
+            <input class="previousWeight__buttonAdd" type="button" value="Add">
+        </form>
+        <p class="moreResults_viewMore">View more</p>
+        <div class="allResults"></div>
+    </section>
 
-    if (weightToday.value.length === 0) {
-        alert("Please add the weight");
-    } else if (weightToday.value <= 69) /*weight to small */ {
-        alert("Hmm, it seems to be incorrect - weight to small");
-    } else {
-        allWeightResults.push(object);
-        weightToday.value = "";
-        updateAverageWeight(); //update averageWeight after adding a weight
-    }
-}
+    <script src="scripts/script.js"></script>
+</body>
 
-button.addEventListener('click', addWeight);
-// END Add weight //
-
-// Weight average //
-function updateAverageWeight() {
-    var sumWeight = 0;
-
-    for (let i = 0; i < allWeightResults.length; i++) {
-        sumWeight += allWeightResults[i].weight;
-    }
-
-    var weightAverageField = document.querySelector(".weightResult__average");
-    var weightAverage = (sumWeight / allWeightResults.length).toFixed(1);
-
-    weightAverageField.innerHTML = weightAverage;
-};
-
-updateAverageWeight();
-// END Weight average //
-
-// View all results //
-const viewMoreButton = document.querySelector(".more");
-const allResults = document.querySelector(".allResults");
-console.log(allResults)
-
-function viewMore() {
-    for (let i = 0; i < allWeightResults.length; i++) {
-        var todayFull = dd + "/" + mm + "/" + yr + ": " + allWeightResults[i].weight;
-        var singleWeightResultElement = document.createElement("p");
-        var singleWeightResultText = document.createTextNode(todayFull);
-
-        singleWeightResultElement.appendChild(singleWeightResultText);
-        allResults.appendChild(singleWeightResultElement);
-
-        console.log(todayFull)
-    }
-}
-viewMoreButton.addEventListener('click', viewMore);
-// END view all results //
+</html>
