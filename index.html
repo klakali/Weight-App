@@ -19,8 +19,10 @@
 
     <section class="todaysWeight">
         <h3 class="todaysWeight__addWeightText">Today's results:</h3>
-        <input class="todaysWeight__writeWeight" type="text" placeholder="Weight...">
-        <input class="todaysWeight__buttonAdd" type="button" value="Add">
+        <form>
+            <input class="todaysWeight__writeWeight" type="text" placeholder="Weight...">
+            <input class="todaysWeight__buttonAdd" type="button" value="Add">
+        </form>
     </section>
 
     <section class="weightResult">
@@ -29,10 +31,20 @@
 
     <section class="weightGraph">
         <div class="weightGraph__30Days"></div>
-        <p class="more">View more</p>
+    </section>
+
+    <section class="moreResults">
+        <p class="moreResults__addprevious">Add previous results</p>
+        <form class="previousWeight__form">
+            <input class="previousWeight__writeWeight" type="text" placeholder="Weight...">
+            <input class="previousWeight__dateWeight" type="date" required>
+            <input class="previousWeight__buttonAdd" type="button" value="Add">
+        </form>
+        <p class="moreResults_viewMore">View more</p>
         <div class="allResults"></div>
     </section>
 
     <script src="scripts/script.js"></script>
 </body>
+
 </html>
