@@ -48,6 +48,7 @@ table {
 body {
   display: flex;
   flex-wrap: wrap;
+  flex-direction: column;
   width: 100%;
   background-color: #0D5AA7;
   font-family: "Asap", sans-serif;
@@ -56,7 +57,7 @@ body {
 
 .welcome {
   margin: 0 auto;
-  width: 80%;
+  width: 70%;
   padding: 4rem 0; }
 
 .welcome__welcomeText {
@@ -72,7 +73,7 @@ body {
 
 .todaysWeight {
   margin: 0 auto;
-  width: 80%;
+  width: 70%;
   padding: 1rem 0;
   display: flex; }
 
@@ -80,31 +81,33 @@ body {
   padding-right: 2rem; }
 
 .todaysWeight__writeWeight {
-  width: 4.5rem; }
+  width: 4.5rem;
+  padding: 0.3rem; }
 
 .todaysWeight__buttonAdd {
   font-family: "Asap", sans-serif;
   color: #fff;
-  padding: 0 1rem;
+  padding: 0.33rem 0.6rem;
   background-color: #5EBF4E; }
 
 .todaysWeight__buttonAdd:hover {
-  font-weight: 600; }
+  font-weight: 600;
+  cursor: pointer; }
 
 .weightResult {
   margin: 0 auto;
-  width: 80%;
+  width: 70%;
   display: flex;
   padding: 1rem 0; }
 
 .weightResult__average {
-  color: #5EBF4E; }
+  color: #5EBF4E;
+  font-weight: 600; }
 
 .weightGraph {
   display: flex;
-  flex-direction: column;
   margin: 0 auto;
-  width: 80%; }
+  width: 70%; }
 
 .weightGraph__30Days {
   margin: 1rem 0;
@@ -112,7 +115,63 @@ body {
   height: 2rem;
   background-color: #fff; }
 
-.more {
-  align-self: flex-end;
+.moreResults {
+  display: flex;
+  align-items: flex-end;
+  flex-direction: column;
+  margin: 0 auto;
+  width: 70%; }
+
+.previousWeight__form {
+  padding-bottom: 1rem;
+  display: none; }
+
+.previousWeight__buttonAdd {
+  font-family: "Asap", sans-serif;
+  color: #fff;
+  padding: 0.33rem 0.6rem;
+  background-color: #5EBF4E; }
+
+.previousWeight__writeWeight {
+  width: 4.5rem;
+  padding: 0.3rem; }
+
+.moreResults_viewMore {
   font-size: 1rem;
+  text-decoration: underline;
+  padding-bottom: 1rem; }
+
+.previousWeight__dateWeight {
+  padding: 0.17rem; }
+
+.moreResults_viewMore:hover {
+  cursor: pointer; }
+
+.moreResults__addprevious {
+  font-size: 1rem;
+  text-decoration: underline;
+  padding-bottom: 1rem; }
+
+.moreResults__addprevious:hover {
+  cursor: pointer; }
+
+.allResults {
+  display: none; }
+
+.allResults__groupResults {
+  display: flex;
+  width: 100%; }
+
+.allResults__results {
+  padding: 1rem 0.8rem 1rem 0;
+  letter-spacing: 0.09rem; }
+
+.allResults__resultRemove,
+.allResults__resultEdit {
+  padding: 1rem 0.8rem 1rem 0;
+  letter-spacing: 0.09rem;
   text-decoration: underline; }
+
+.allResults__resultEdit:hover,
+.allResults__resultRemove:hover {
+  cursor: pointer; }
