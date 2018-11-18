@@ -1,4 +1,5 @@
-$main-font: 'Asap', sans-serif;
+$main-font: 'Asap',
+sans-serif;
 $font-color: #fff;
 $font-color-special: #5EBF4E;
 $background: #0D5AA7;
@@ -6,10 +7,32 @@ $middle-place: 0 auto;
 
 @mixin margin-auto {
     margin: 0 auto;
-    width: 80%;
+    width: 70%;
 }
 
 @mixin fontStyle {
     font-family: $main-font;
     color: $font-color;
+}
+
+@mixin formStyle {
+    @include fontStyle;
+    padding: 0.33rem 0.6rem;
+    background-color: $font-color-special;
+}
+
+@mixin writeWeightStyle {
+    width: 4.5rem;
+    padding: 0.3rem;
+}
+
+@mixin moreMixin {
+    font-size: 1rem;
+    text-decoration: underline;
+    padding-bottom: 1rem;
+}
+
+@mixin resultsStyle {
+    padding: 1rem 0.8rem 1rem 0;
+    letter-spacing: 0.09rem;
 }
