@@ -84,7 +84,8 @@ body {
   width: 4.5rem;
   padding: 0.3rem; }
 
-.todaysWeight__buttonAdd {
+.todaysWeight__buttonAdd,
+.editWeight__buttonAdd {
   font-family: "Asap", sans-serif;
   color: #fff;
   padding: 0.33rem 0.6rem;
@@ -132,7 +133,8 @@ body {
   padding: 0.33rem 0.6rem;
   background-color: #5EBF4E; }
 
-.previousWeight__writeWeight {
+.previousWeight__writeWeight,
+.editWeight__writeWeight {
   width: 4.5rem;
   padding: 0.3rem; }
 
@@ -141,7 +143,8 @@ body {
   text-decoration: underline;
   padding-bottom: 1rem; }
 
-.previousWeight__dateWeight {
+.previousWeight__dateWeight,
+.editWeight__dateWeight {
   padding: 0.17rem; }
 
 .moreResults_viewMore:hover {
@@ -175,3 +178,14 @@ body {
 .allResults__resultEdit:hover,
 .allResults__resultRemove:hover {
   cursor: pointer; }
+
+.editWeight__form {
+  display: flex;
+  align-items: center;
+  justify-content: center; }
+
+.editWeight__buttonAdd {
+  font-family: "Asap", sans-serif;
+  color: #fff;
+  padding: 0.33rem 0.6rem;
+  background-color: #5EBF4E; }
