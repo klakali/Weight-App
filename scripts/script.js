@@ -46,21 +46,23 @@ var allWeightResults = [
     {
         date: new Date(),
         dateViewStyle: new Date().toLocaleDateString("en-GB", dateOptions),
-        weight: 81
+        weight: 78
     }];
 
 var weightToday = document.querySelector(".todaysWeight__writeWeight");
 
 function addWeight() {
-    viewMoreRefresh(); //update the array with results
     let object = {
         date: today,
         dateViewStyle: today.toLocaleDateString("en-GB", dateOptions),
-        weight: parseInt(weightToday.value)
+        weight: parseInt(weightToday.value),
+        node: Node
     };
 
     if (weightToday.value.length === 0) {
         alert("Please add the weight");
+    } else if (isNaN(weightToday.value)) {
+        alert("Please add number");
     } else if (weightToday.value <= 69) /*weight to small */ {
         alert("Hmm, it seems to be incorrect - weight to small");
     } else if (weightToday.value > 99) /*weight to large */ {
@@ -115,14 +117,14 @@ var weightPrevious = document.querySelector(".previousWeight__writeWeight");
 
 function addPreviousWeight() {
     let object = {
-        dateViewStyle: Date.parse(dateControl.value),
+        date: new Date(Date.parse(dateControl.value)),
+        dateViewStyle: new Date(Date.parse(dateControl.value)).toLocaleDateString("en-GB", dateOptions),
         //dateViewStyle: dateControl.value,
         weight: parseInt(weightPrevious.value)
     };
-    console.log(weightPrevious)
     if (weightPrevious.value.length === 0 && dateControl.value.length === 0) {
         alert("Please add a weight and a date");
-    } /* else if (weightPrevious.value.length === 0) {
+    } else if (weightPrevious.value.length === 0) {
         alert("Please add a weight");
     } else if (dateControl.value.length === 0) {
         alert("Please add a date");
@@ -130,10 +132,12 @@ function addPreviousWeight() {
         alert("Hmm, it seems to be incorrect - weight to small");
     } else if (weightPrevious.value > 99) {
         alert("Hmm, it seems to be incorrect - weight to large");
-    } */ else {
+    } else {
+        viewMoreUpdate(); //refresh the list / sort
         allWeightResults.push(object);
         updateAverageWeight(); //update averageWeight after adding a weight
-        viewMoreCreate(allWeightResults.length - 1, allWeightResults.length); //add only the pushed object
+        sortByDate();
+        viewMoreCreate(0, allWeightResults.length);
         weightPrevious.value = "";
         dateControl.value = "";
     }
@@ -148,21 +152,12 @@ addPreviousWeightButton.addEventListener('click', addPreviousWeight);
 const viewMoreButton = document.querySelector(".moreResults_viewMore");
 const allResults = document.querySelector(".allResults");
 
-
-function viewMoreRefresh() {
-    if (isMoreRefreshed === false) {
-        viewMoreCreate(0, allWeightResults.length);
-        isMoreRefreshed = true;
-    }
-    return;
-}
-
 function viewMoreCreate(start, length) {
     for (let i = start; i < length; i++) {
         var listFull = allWeightResults[i].dateViewStyle + ": " + allWeightResults[i].weight;
 
         let singleWeightResultParent = document.createElement("div");
-        singleWeightResultParent.classList.add("allResults__groupResults");;
+        singleWeightResultParent.classList.add("allResults__groupResults");
         allResults.appendChild(singleWeightResultParent);
 
         let singleWeightResultElement = document.createElement("p");
@@ -184,17 +179,25 @@ function viewMoreCreate(start, length) {
         singleWeightResultParent.appendChild(singleWeightResultRemove);
 
         singleWeightResultRemove.addEventListener("click", removeSingleResult) // remove function
-        singleWeightResultEdit.addEventListener("click", editSungleResult) // remove function
-
+        singleWeightResultEdit.addEventListener("click", editSungleResult) // edit function
     }
-    return;
+}
+
+viewMoreCreate(0, allWeightResults.length);
+
+function viewMoreUpdate() {
+    let parentToBeUpdated = document.querySelectorAll(".allResults__groupResults");
+    parentToBeUpdated.forEach(function (parent) {
+        while (parent.firstChild) {
+            parent.removeChild(parent.firstChild); //remove weight + edit & remove
+        }
+    });
 }
 
 var isMoreRefreshed = false;
 var isMoreVisible = false;
 
 function viewMore() {
-    viewMoreRefresh();
     if (isMoreVisible === true) {
         allResults.style.display = "none";
         isMoreVisible = false;
@@ -216,9 +219,68 @@ function removeSingleResult() {
     }
 }
 
-function editSungleResult() {
+function addEditForm() {
+    let thisParent = event.currentTarget.parentElement;
+
+    let editWeight__form = document.createElement("form");
+    editWeight__form.classList.add("editWeight__form");
+    thisParent.appendChild(editWeight__form);
+
+    let editWeight__writeWeight = document.createElement("input");
+    editWeight__writeWeight.setAttribute("type", "text");
+    editWeight__writeWeight.setAttribute("placeholder", "Weight...");
+    editWeight__writeWeight.classList.add("editWeight__writeWeight");
+
+    let editWeight__dateWeight = document.createElement("input");
+    editWeight__dateWeight.setAttribute("type", "date");
+    editWeight__dateWeight.classList.add("editWeight__dateWeight");
+
+    let editWeight__buttonAdd = document.createElement("input");
+    editWeight__buttonAdd.setAttribute("type", "button");
+    editWeight__buttonAdd.setAttribute("value", "Edit");
+    editWeight__buttonAdd.classList.add("editWeight__buttonAdd");
+
+    editWeight__form.appendChild(editWeight__writeWeight);
+    editWeight__form.appendChild(editWeight__dateWeight);
+    editWeight__form.appendChild(editWeight__buttonAdd);
+}
+
+function removeEditForm() {
+    let thisParent = event.currentTarget.parentElement;
+    let editWeight__writeWeight = document.querySelector(".editWeight__form");
+
+    thisParent.removeChild(editWeight__writeWeight);
+
+}
+
+function cancelEdit() {
+    this.previousSibling.style.display = "block";
+    this.innerHTML = "Edit";
+    this.removeEventListener("click", cancelEdit);
+    this.addEventListener("click", editSungleResult);
+    removeEditForm();
+}
+
+function editSungleResult(e) {
     this.previousSibling.style.display = "none";
+    this.removeEventListener("click", editSungleResult);
+    this.innerHTML = "Cancel"; // change the button task to stop the function
+    this.addEventListener("click", cancelEdit)
+    addEditForm();
 }
 
 //toBeRemoved.forEach(remove => remove.addEventListener('click', removeWeight))
 // END Delete & remove weight results //
+
+// Sort the weight results by date //
+function sortByDate() {
+    function compareDates(a, b) {
+        if (a.date > b.date) {
+            return 1;
+        } else if (a.date < b.date) {
+            return -1;
+        }
+    }
+    allWeightResults.sort(compareDates);
+}
+// END Sort the weight results by date //
