@@ -45,7 +45,8 @@ body {
     @include writeWeightStyle;
 }
 
-.todaysWeight__buttonAdd {
+.todaysWeight__buttonAdd,
+.editWeight__buttonAdd {
     @include formStyle;
 }
 
@@ -102,7 +103,8 @@ body {
     @include formStyle;
 }
 
-.previousWeight__writeWeight {
+.previousWeight__writeWeight,
+.editWeight__writeWeight {
     @include writeWeightStyle;
 }
 
@@ -110,7 +112,8 @@ body {
     @include moreMixin;
 }
 
-.previousWeight__dateWeight {
+.previousWeight__dateWeight,
+.editWeight__dateWeight {
     padding: 0.17rem;
 }
 
@@ -149,4 +152,16 @@ body {
 .allResults__resultRemove:hover {
     cursor: pointer;
 }
-// More results //
+
+// END More results //
+
+// Edit & remove //
+.editWeight__form {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.editWeight__buttonAdd {
+     @include formStyle;
+}
+// END Edit & remove //
