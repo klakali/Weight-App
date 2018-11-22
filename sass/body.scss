@@ -7,6 +7,15 @@ body {
     font-family: $main-font;
     font-size: 1.5rem;
     color: $font-color;
+
+    @media #{$sixhundred} {
+        font-size: 1.2rem;
+    }
+    
+        @media #{$fourhundred} {
+        font-size: 1rem;
+    }
+
 }
 
 // Header welcome //
@@ -19,6 +28,14 @@ body {
     font-size: 4rem;
     padding-bottom: 2rem;
     font-weight: 600;
+
+    @media #{$sixhundred} {
+        font-size: 3rem;
+    }
+
+    @media #{$fourhundred} {
+        font-size: 2.5rem;
+    }
 }
 
 .welcome__motivationalText {
@@ -26,6 +43,10 @@ body {
     font-weight: 500;
     font-size: 2rem;
     color: #5EBF4E;
+
+    @media #{$fourhundred} {
+        font-size: 1.5rem;
+    }
 }
 
 // END Header welcome //
@@ -135,6 +156,7 @@ body {
 
 .allResults__groupResults {
     display: flex;
+    justify-content: flex-end;
     width: 100%;
 }
 
@@ -148,7 +170,13 @@ body {
     text-decoration: underline;
 }
 
-.allResults__resultEdit:hover,
+.allResults__resultRemove,
+.allResults__resultEdit:last-child {
+    padding: 1rem 0rem 1rem 0;
+    letter-spacing: 0.09rem;
+}
+
+.allResults__resultEdit,
 .allResults__resultRemove:hover {
     cursor: pointer;
 }
@@ -157,11 +185,14 @@ body {
 
 // Edit & remove //
 .editWeight__form {
+    padding-left: 1rem;
     display: flex;
     align-items: center;
     justify-content: center;
 }
+
 .editWeight__buttonAdd {
-     @include formStyle;
+    @include formStyle;
 }
+
 // END Edit & remove //
