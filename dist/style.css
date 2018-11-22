@@ -54,28 +54,49 @@ body {
   font-family: "Asap", sans-serif;
   font-size: 1.5rem;
   color: #fff; }
+  @media (max-width: 600px) {
+    body {
+      font-size: 1.2rem; } }
+  @media (max-width: 400px) {
+    body {
+      font-size: 1rem; } }
 
 .welcome {
   margin: 0 auto;
   width: 70%;
   padding: 4rem 0; }
+  @media (max-width: 600px) {
+    .welcome {
+      width: 80%; } }
 
 .welcome__welcomeText {
   font-size: 4rem;
   padding-bottom: 2rem;
   font-weight: 600; }
+  @media (max-width: 600px) {
+    .welcome__welcomeText {
+      font-size: 3rem; } }
+  @media (max-width: 400px) {
+    .welcome__welcomeText {
+      font-size: 2.5rem; } }
 
 .welcome__motivationalText {
   font-style: italic;
   font-weight: 500;
   font-size: 2rem;
   color: #5EBF4E; }
+  @media (max-width: 400px) {
+    .welcome__motivationalText {
+      font-size: 1.5rem; } }
 
 .todaysWeight {
   margin: 0 auto;
   width: 70%;
   padding: 1rem 0;
   display: flex; }
+  @media (max-width: 600px) {
+    .todaysWeight {
+      width: 80%; } }
 
 .todaysWeight__addWeightText {
   padding-right: 2rem; }
@@ -100,6 +121,9 @@ body {
   width: 70%;
   display: flex;
   padding: 1rem 0; }
+  @media (max-width: 600px) {
+    .weightResult {
+      width: 80%; } }
 
 .weightResult__average {
   color: #5EBF4E;
@@ -109,6 +133,9 @@ body {
   display: flex;
   margin: 0 auto;
   width: 70%; }
+  @media (max-width: 600px) {
+    .weightGraph {
+      width: 80%; } }
 
 .weightGraph__30Days {
   margin: 1rem 0;
@@ -122,6 +149,9 @@ body {
   flex-direction: column;
   margin: 0 auto;
   width: 70%; }
+  @media (max-width: 600px) {
+    .moreResults {
+      width: 80%; } }
 
 .previousWeight__form {
   padding-bottom: 1rem;
@@ -163,6 +193,7 @@ body {
 
 .allResults__groupResults {
   display: flex;
+  justify-content: flex-end;
   width: 100%; }
 
 .allResults__results {
@@ -175,11 +206,17 @@ body {
   letter-spacing: 0.09rem;
   text-decoration: underline; }
 
-.allResults__resultEdit:hover,
+.allResults__resultRemove,
+.allResults__resultEdit:last-child {
+  padding: 1rem 0rem 1rem 0;
+  letter-spacing: 0.09rem; }
+
+.allResults__resultEdit,
 .allResults__resultRemove:hover {
   cursor: pointer; }
 
 .editWeight__form {
+  padding-left: 1rem;
   display: flex;
   align-items: center;
   justify-content: center; }
