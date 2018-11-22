@@ -8,6 +8,10 @@ $middle-place: 0 auto;
 @mixin margin-auto {
     margin: 0 auto;
     width: 70%;
+    
+    @media #{$sixhundred} {
+        width: 80%;
+    }
 }
 
 @mixin fontStyle {
@@ -36,3 +40,8 @@ $middle-place: 0 auto;
     padding: 1rem 0.8rem 1rem 0;
     letter-spacing: 0.09rem;
 }
+
+// Media queries //
+
+$sixhundred: "(max-width: 600px)";
+$fourhundred: "(max-width: 400px)"
