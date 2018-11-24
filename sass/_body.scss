@@ -11,11 +11,10 @@ body {
     @media #{$sixhundred} {
         font-size: 1.2rem;
     }
-    
-        @media #{$fourhundred} {
+
+    @media #{$fivehundred} {
         font-size: 1rem;
     }
-
 }
 
 // Header welcome //
@@ -33,7 +32,7 @@ body {
         font-size: 3rem;
     }
 
-    @media #{$fourhundred} {
+    @media #{$fivehundred} {
         font-size: 2.5rem;
     }
 }
@@ -44,7 +43,7 @@ body {
     font-size: 2rem;
     color: #5EBF4E;
 
-    @media #{$fourhundred} {
+    @media #{$fivehundred} {
         font-size: 1.5rem;
     }
 }
@@ -158,6 +157,12 @@ body {
     display: flex;
     justify-content: flex-end;
     width: 100%;
+
+    @media #{$sixhundred} {
+        display: flex;
+        flex-wrap: wrap;
+        padding: 0.5rem 0;
+    }
 }
 
 .allResults__results {
@@ -189,10 +194,16 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
+
+    @media #{$sixhundred} {
+        display: flex;
+        flex-wrap: wrap;
+        padding: 0.5rem 0;
+        justify-content: flex-end;
+    }
 }
 
 .editWeight__buttonAdd {
     @include formStyle;
 }
-
 // END Edit & remove //
