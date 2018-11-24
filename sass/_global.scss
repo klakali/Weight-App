@@ -8,9 +8,13 @@ $middle-place: 0 auto;
 @mixin margin-auto {
     margin: 0 auto;
     width: 70%;
-    
+
     @media #{$sixhundred} {
         width: 80%;
+    }
+
+    @media #{$fivehundred} {
+        width: 90%;
     }
 }
 
@@ -44,4 +48,4 @@ $middle-place: 0 auto;
 // Media queries //
 
 $sixhundred: "(max-width: 600px)";
-$fourhundred: "(max-width: 400px)"
+$fivehundred: "(max-width: 500px)";
