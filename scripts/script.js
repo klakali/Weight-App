@@ -54,6 +54,7 @@ var allWeightResults = [
 var weightToday = document.querySelector(".todaysWeight__writeWeight");
 
 function addWeight() {
+    var ifItExists = false; //to check the database
     let object = {
         date: today,
         dateViewStyle: today.toLocaleDateString("en-GB", dateOptions),
@@ -70,10 +71,19 @@ function addWeight() {
     } else if (weightToday.value > 99) /*weight to large */ {
         alert("Hmm, it seems to be incorrect - weight to large");
     } else {
-        allWeightResults.push(object);
-        updateAverageWeight(); //update averageWeight after adding a weight
-        viewMoreCreate(allWeightResults.length - 1, allWeightResults.length); //add only the pushed object
-        weightToday.value = "";
+        for (var i = 0; i < allWeightResults.length; i++) {
+            if (object.dateViewStyle === allWeightResults[i].dateViewStyle) {
+                alert("This date is already added");
+                ifItExists = true;
+                break;
+            }
+        }
+        if (ifItExists === false) {
+            allWeightResults.push(object);
+            updateAverageWeight(); //update averageWeight after adding a weight
+            viewMoreCreate(allWeightResults.length - 1, allWeightResults.length); //add only the pushed object
+            weightToday.value = "";
+        }
     }
 }
 
@@ -120,6 +130,7 @@ function addPrevious() {
 var weightPrevious = document.querySelector(".previousWeight__writeWeight");
 
 function addPreviousWeight() {
+    var ifItExists = false; //to check the database
     let object = {
         date: new Date(Date.parse(dateControl.value)),
         dateViewStyle: new Date(Date.parse(dateControl.value)).toLocaleDateString("en-GB", dateOptions),
@@ -127,6 +138,8 @@ function addPreviousWeight() {
     };
     if (weightPrevious.value.length === 0 && dateControl.value.length === 0) {
         alert("Please add a weight and a date");
+    } else if (isNaN(weightPrevious.value)) {
+        alert("Please add number");
     } else if (weightPrevious.value.length === 0) {
         alert("Please add a weight");
     } else if (dateControl.value.length === 0) {
@@ -136,13 +149,22 @@ function addPreviousWeight() {
     } else if (weightPrevious.value > 99) {
         alert("Hmm, it seems to be incorrect - weight to large");
     } else {
-        viewMoreUpdate(); //refresh the list / sort
-        allWeightResults.push(object);
-        updateAverageWeight(); //update averageWeight after adding a weight
-        sortByDate();
-        viewMoreCreate(0, allWeightResults.length);
-        weightPrevious.value = "";
-        dateControl.value = "";
+        for (var i = 0; i < allWeightResults.length; i++) {
+            if (object.dateViewStyle === allWeightResults[i].dateViewStyle) {
+                alert("This date is already added");
+                ifItExists = true;
+                break;
+            }
+        }
+        if (ifItExists === false) {
+            viewMoreUpdate(); //refresh the list / sort
+            allWeightResults.push(object);
+            updateAverageWeight(); //update averageWeight after adding a weight
+            sortByDate();
+            viewMoreCreate(0, allWeightResults.length);
+            weightPrevious.value = "";
+            dateControl.value = "";
+        }
     }
 }
 
@@ -162,6 +184,8 @@ function viewMoreCreate(start, length) {
         let singleWeightResultParent = document.createElement("div");
         singleWeightResultParent.classList.add("allResults__groupResults");
         allResults.appendChild(singleWeightResultParent);
+
+        singleWeightResultParent.setAttribute("order", i); //'edit function' purpose - show the edited date & weight
 
         let singleWeightResultElement = document.createElement("p");
         singleWeightResultElement.classList.add("allResults__results");
@@ -192,7 +216,9 @@ viewMoreCreate(0, allWeightResults.length);
 
 function viewMoreUpdate() {
     var parentToBeUpdated = document.querySelectorAll(".allResults__groupResults");
-    parentToBeUpdated.forEach(function (parent) {
+    var parentParentToBeUpdated = document.querySelectorAll(".allResults");
+
+    parentParentToBeUpdated.forEach(function (parent) {
         while (parent.firstChild) {
             parent.removeChild(parent.firstChild); //remove weight + edit & remove
         }
@@ -218,34 +244,46 @@ viewMoreButton.addEventListener('click', viewMore);
 
 // Remove & Edit weight results //
 function removeSingleResult() {
+    let resultToBeUpdated = this.parentNode;
+    let resultAttribute = resultToBeUpdated.getAttribute("order");
+
     var confirmation = confirm('Are you sure?');
     if (confirmation == true) {
         this.parentNode.remove();
+        allWeightResults.splice(resultAttribute, 1);
+
+        viewMoreUpdate(); //refresh the list / sort
+        updateAverageWeight(); //update averageWeight after adding a weight
+        sortByDate();
+        viewMoreCreate(0, allWeightResults.length);
     }
 }
 
-function removeEditForm() {
-    let thisParent = event.currentTarget.parentElement;
+function removeEditForm(e) {
+    let thisParent = this.currentTarget.parentElement;
     let editWeight__writeWeight = document.querySelector(".editWeight__form");
 
     thisParent.removeChild(editWeight__writeWeight);
 }
 
-function cancelEdit() {
+function cancelEdit(e) {
+    let weightOrder = this.parentNode.getAttribute("order");
     this.previousSibling.style.display = "block";
     this.innerHTML = "Edit";
     this.removeEventListener("click", cancelEdit);
     this.style.color = "#fff";
     this.addEventListener("click", editSungleResult);
-    removeEditForm();
+    
+    this.parentNode.removeChild(this.parentNode.lastChild);
 }
 
 function editWeight() {
     let weightUpdated = parseFloat(this.parentNode.childNodes[0].value);
     let datetUpdated = this.parentNode.childNodes[1].value;
 
-    let weightOrder = this.getAttribute("order");
-    
+    let resultToBeUpdated = this.parentNode.parentNode;
+    let resultAttribute = resultToBeUpdated.getAttribute("order");
+
     let object = {
         date: new Date(Date.parse(this.parentNode.childNodes[1].value)),
         dateViewStyle: new Date(Date.parse(datetUpdated)).toLocaleDateString("en-GB", dateOptions),
@@ -261,14 +299,28 @@ function editWeight() {
     } else if (weightUpdated > 99) {
         alert("Hmm, it seems to be incorrect - weight to large");
     } else {
-        allWeightResults[weightOrder] = object;
+        allWeightResults[resultAttribute] = object;
         updateAverageWeight(); //update averageWeight after adding a weight
-        console.log(this.parentNode.parentNode)
-    }
 
+        let thisParent = this.parentNode.parentNode;
+        let editWeight__writeWeight = document.querySelector(".editWeight__form");
+        thisParent.removeChild(editWeight__writeWeight);
+
+        thisParent.firstChild.style.display = "block";
+        thisParent.children[1].style.color = "#fff";
+        thisParent.children[1].innerHTML = "Edit";
+        thisParent.children[1].addEventListener("click", editSungleResult);
+
+        viewMoreUpdate(); //refresh the list / sort
+        updateAverageWeight(); //update averageWeight after adding a weight
+        sortByDate();
+        viewMoreCreate(0, allWeightResults.length);
+    }
 }
 
-function editSungleResult(e) { // main EDIT function
+var resultEditButtons = Array.from(document.querySelectorAll(".allResults__resultEdit"));
+
+function editSungleResult() { // main EDIT function
     this.previousSibling.style.display = "none";
     this.removeEventListener("click", editSungleResult);
     this.innerHTML = "Cancel"; // change the button task to stop the function
@@ -286,6 +338,7 @@ function editSungleResult(e) { // main EDIT function
     let editWeight__form = document.createElement("form");
     editWeight__form.classList.add("editWeight__form");
     thisParent.appendChild(editWeight__form);
+    editWeight__form.setAttribute("order", weightOrder);
 
     let editWeight__writeWeight = document.createElement("input");
     editWeight__writeWeight.setAttribute("type", "text");
@@ -302,7 +355,6 @@ function editSungleResult(e) { // main EDIT function
     let editWeight__buttonAdd = document.createElement("input");
     editWeight__buttonAdd.setAttribute("type", "button");
     editWeight__buttonAdd.setAttribute("value", "Edit");
-    editWeight__buttonAdd.setAttribute("order", weightOrder); //'edit function' purpose - show the edited date & weight
     editWeight__buttonAdd.classList.add("editWeight__buttonAdd");
     editWeight__buttonAdd.addEventListener("click", editWeight)
 
