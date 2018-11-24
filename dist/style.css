@@ -57,7 +57,7 @@ body {
   @media (max-width: 600px) {
     body {
       font-size: 1.2rem; } }
-  @media (max-width: 400px) {
+  @media (max-width: 500px) {
     body {
       font-size: 1rem; } }
 
@@ -68,6 +68,9 @@ body {
   @media (max-width: 600px) {
     .welcome {
       width: 80%; } }
+  @media (max-width: 500px) {
+    .welcome {
+      width: 90%; } }
 
 .welcome__welcomeText {
   font-size: 4rem;
@@ -76,7 +79,7 @@ body {
   @media (max-width: 600px) {
     .welcome__welcomeText {
       font-size: 3rem; } }
-  @media (max-width: 400px) {
+  @media (max-width: 500px) {
     .welcome__welcomeText {
       font-size: 2.5rem; } }
 
@@ -85,7 +88,7 @@ body {
   font-weight: 500;
   font-size: 2rem;
   color: #5EBF4E; }
-  @media (max-width: 400px) {
+  @media (max-width: 500px) {
     .welcome__motivationalText {
       font-size: 1.5rem; } }
 
@@ -97,6 +100,9 @@ body {
   @media (max-width: 600px) {
     .todaysWeight {
       width: 80%; } }
+  @media (max-width: 500px) {
+    .todaysWeight {
+      width: 90%; } }
 
 .todaysWeight__addWeightText {
   padding-right: 2rem; }
@@ -124,6 +130,9 @@ body {
   @media (max-width: 600px) {
     .weightResult {
       width: 80%; } }
+  @media (max-width: 500px) {
+    .weightResult {
+      width: 90%; } }
 
 .weightResult__average {
   color: #5EBF4E;
@@ -136,6 +145,9 @@ body {
   @media (max-width: 600px) {
     .weightGraph {
       width: 80%; } }
+  @media (max-width: 500px) {
+    .weightGraph {
+      width: 90%; } }
 
 .weightGraph__30Days {
   margin: 1rem 0;
@@ -152,6 +164,9 @@ body {
   @media (max-width: 600px) {
     .moreResults {
       width: 80%; } }
+  @media (max-width: 500px) {
+    .moreResults {
+      width: 90%; } }
 
 .previousWeight__form {
   padding-bottom: 1rem;
@@ -195,6 +210,11 @@ body {
   display: flex;
   justify-content: flex-end;
   width: 100%; }
+  @media (max-width: 600px) {
+    .allResults__groupResults {
+      display: flex;
+      flex-wrap: wrap;
+      padding: 0.5rem 0; } }
 
 .allResults__results {
   padding: 1rem 0.8rem 1rem 0;
@@ -220,6 +240,12 @@ body {
   display: flex;
   align-items: center;
   justify-content: center; }
+  @media (max-width: 600px) {
+    .editWeight__form {
+      display: flex;
+      flex-wrap: wrap;
+      padding: 0.5rem 0;
+      justify-content: flex-end; } }
 
 .editWeight__buttonAdd {
   font-family: "Asap", sans-serif;
