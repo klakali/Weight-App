@@ -24,7 +24,7 @@ var textMotivationAll = [
 
 // Add weight //
 var today = new Date();
-var todayPreviousMax = today.toLocaleDateString("en-GB").split("/").reverse("/").join("-"); //max prvious date att
+var todayPreviousMax = today.toLocaleDateString("en-GB").split("/").reverse("/").join("-"); //max prvious date att. Added to match the default style of 'date' input
 
 var dateOptions = {
     year: 'numeric',
@@ -38,7 +38,27 @@ var allWeightResults = [
     {
         date: new Date(),
         dateViewStyle: new Date().toLocaleDateString("en-GB", dateOptions),
-        weight: 79.92
+        weight: 80
+    },
+    {
+        date: new Date(),
+        dateViewStyle: new Date().toLocaleDateString("en-GB", dateOptions),
+        weight: 85
+    },
+    {
+        date: new Date(),
+        dateViewStyle: new Date().toLocaleDateString("en-GB", dateOptions),
+        weight: 83
+    },
+    {
+        date: new Date(),
+        dateViewStyle: new Date().toLocaleDateString("en-GB", dateOptions),
+        weight: 82
+    },
+    {
+        date: new Date(),
+        dateViewStyle: new Date().toLocaleDateString("en-GB", dateOptions),
+        weight: 85
     },
     {
         date: new Date(),
@@ -48,8 +68,29 @@ var allWeightResults = [
     {
         date: new Date(),
         dateViewStyle: new Date().toLocaleDateString("en-GB", dateOptions),
+        weight: 81
+    },
+    {
+        date: new Date(),
+        dateViewStyle: new Date().toLocaleDateString("en-GB", dateOptions),
+        weight: 79
+    },
+    {
+        date: new Date(),
+        dateViewStyle: new Date().toLocaleDateString("en-GB", dateOptions),
+        weight: 79
+    },
+    {
+        date: new Date(),
+        dateViewStyle: new Date().toLocaleDateString("en-GB", dateOptions),
+        weight: 75
+    },
+    {
+        date: new Date(),
+        dateViewStyle: new Date().toLocaleDateString("en-GB", dateOptions),
         weight: 78
-    }];
+    }
+];
 
 var weightToday = document.querySelector(".todaysWeight__writeWeight");
 
@@ -212,7 +253,7 @@ function viewMoreCreate(start, length) {
     }
 }
 
-viewMoreCreate(0, allWeightResults.length);
+viewMoreCreate(0, allWeightResults.length); //to create the list after the page was loaded
 
 function viewMoreUpdate() {
     var parentToBeUpdated = document.querySelectorAll(".allResults__groupResults");
@@ -254,8 +295,8 @@ function removeSingleResult() {
 
         viewMoreUpdate(); //refresh the list / sort
         updateAverageWeight(); //update averageWeight after adding a weight
-        sortByDate();
-        viewMoreCreate(0, allWeightResults.length);
+        sortByDate(); //sort before creating
+        viewMoreCreate(0, allWeightResults.length); //create the view
     }
 }
 
@@ -273,7 +314,7 @@ function cancelEdit(e) {
     this.removeEventListener("click", cancelEdit);
     this.style.color = "#fff";
     this.addEventListener("click", editSungleResult);
-    
+
     this.parentNode.removeChild(this.parentNode.lastChild);
 }
 
@@ -311,8 +352,8 @@ function editWeight() {
         thisParent.children[1].innerHTML = "Edit";
         thisParent.children[1].addEventListener("click", editSungleResult);
 
-        viewMoreUpdate(); //refresh the list / sort
-        updateAverageWeight(); //update averageWeight after adding a weight
+        viewMoreUpdate();
+        updateAverageWeight();
         sortByDate();
         viewMoreCreate(0, allWeightResults.length);
     }
@@ -376,3 +417,91 @@ function sortByDate() {
     allWeightResults.sort(compareDates);
 }
 // END Sort the weight results by date //
+
+// Canvas & Graph //
+// f added to make the arc looks smooth www.html5rocks.com/en/tutorials/canvas/hidpi/
+var scaleStartEnd = 60;
+var elementsY = [85, 80, 75, 70];
+var elementsYsub = elementsY[0] - elementsY[1];
+
+function setupCanvas(canvas) {
+    // Get the device pixel ratio, falling back to 1.
+    var dpr = window.devicePixelRatio || 1;
+    // Get the size of the canvas in CSS pixels.
+    var rect = canvas.getBoundingClientRect();
+    // Give the canvas pixel dimensions of their CSS
+    // size * the device pixel ratio.
+    canvas.width = rect.width * dpr;
+    canvas.height = rect.height * dpr;
+    var ctx = canvas.getContext('2d');
+    ctx.scale(dpr, dpr);
+
+    // Scale all drawing operations by the dpr, so you
+    // don't have to worry about the difference.
+
+    //custom graph: 
+    let distance = Math.ceil((canvas.width - scaleStartEnd) / 30);
+    weightPoint(ctx, canvas.width, canvas.height, distance); //points on the graph
+    xAxis(ctx, canvas.height - 10, distance); //the xAxis scale creator - '10' for height
+    drawCanvasArea(ctx, canvas.width - scaleStartEnd, canvas.height - scaleStartEnd, distance); //the main graph, inside canvas
+
+    return ctx;
+}
+var ctx = setupCanvas(document.querySelector(".weightGraph"));
+ctx.fillStyle = "#fff";
+
+function drawCanvasArea(ctx, width, height, distance) {
+    ctx.rect(scaleStartEnd / 2, scaleStartEnd / 2, width, height);
+    ctx.stroke();
+}
+
+function xAxis(ctx, height, distance) {
+    var elementsX = ['30', '29', '28', '27', '26', '25', '24', '23', '22', '21', '20', '19', '18', '17', '16', '15', '14', '13', '12', '11', '10', '09', '08', '07', '06', '05', '04', '03', '02', '01']
+    for (var i = 0; i < elementsX.length; i++) {
+        ctx.fillText(elementsX[i], (i * distance) + scaleStartEnd / 2, height);
+    }
+}
+
+function yAxis(ctx, height, width, distanceY) {
+    for (var i = 0; i <= elementsY.length - 1; i++) {
+        ctx.fillText(elementsY[i], 9, (distanceY * i) + scaleStartEnd / 2);
+        drawLine(ctx, scaleStartEnd / 2, (distanceY * i) + scaleStartEnd / 2, width - scaleStartEnd / 2, (distanceY * i) + scaleStartEnd / 2);
+    }
+}
+
+function drawLine(ctx, startX, startY, endX, endY) {
+    ctx.beginPath();
+    ctx.moveTo(startX, startY);
+    ctx.lineTo(endX, endY);
+    ctx.strokeStyle = "#fff";
+    ctx.stroke();
+    ctx.restore();
+}
+
+function weightPoint(ctx, width, height, distance) {
+    ctx.fillStyle = "#fff";
+    let distanceY = (height - scaleStartEnd) / elementsY.length;
+    yAxis(ctx, height, width, distanceY); //the yAxis scale creator
+    let scaleBase = (elementsY[0] + elementsYsub) - elementsY[elementsY.length - 1];
+    console.log(scaleBase)
+    let originY = height - scaleStartEnd;
+    let scaleBaseHeight = originY / scaleBase;
+    console.log(scaleBaseHeight)
+
+    for (let i = allWeightResults.length - 1; i >= 0; i--) {
+        let yPointCalc = originY - ((allWeightResults[i].weight - 65) * scaleBaseHeight);
+        let plusOne = i + 1;
+        ctx.beginPath();
+        ctx.fillStyle = "#fff";
+        ctx.arc((i * distance) + scaleStartEnd / 2, yPointCalc + scaleStartEnd / 2, 4, 0, 2 * Math.PI);
+
+        if (i < allWeightResults.length - 1) {
+            let yPointCalcScale = originY - ((allWeightResults[plusOne].weight - 65) * scaleBaseHeight);
+            ctx.lineTo(((i + 1) * distance) + scaleStartEnd / 2, yPointCalcScale + scaleStartEnd / 2);
+
+        }
+        ctx.stroke();
+        ctx.fill();
+    }
+}
+// END Canvas & Graph //
