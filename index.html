@@ -29,20 +29,33 @@
         <p>Average weight from 30 days: <span class="weightResult__average">75</span> kg</p>
     </section>
 
-    <section class="weightGraph">
-        <div class="weightGraph__30Days"></div>
-    </section>
+    <canvas class="weightGraph"></canvas>
 
     <section class="moreResults">
         <p class="moreResults__addprevious">Add previous results</p>
         <form class="previousWeight__form">
             <input class="previousWeight__writeWeight" type="text" placeholder="Weight...">
-            <input class="previousWeight__dateWeight" type="date" required>
+            <input class="previousWeight__dateWeight" type="date">
             <input class="previousWeight__buttonAdd" type="button" value="Add">
         </form>
         <p class="moreResults_viewMore">View more</p>
         <div class="allResults"></div>
     </section>
+
+    <script src="https://www.gstatic.com/firebasejs/5.7.0/firebase.js"></script>
+    <script>
+        // Initialize Firebase
+        var config = {
+            apiKey: "AIzaSyArSh5KJoIynfQ4RdxO8Az6Y9ebEjzKtKM",
+            authDomain: "weightapp-419e7.firebaseapp.com",
+            databaseURL: "https://weightapp-419e7.firebaseio.com",
+            projectId: "weightapp-419e7",
+            storageBucket: "weightapp-419e7.appspot.com",
+            messagingSenderId: "790018652349"
+        };
+        firebase.initializeApp(config);
+
+    </script>
 
     <script src="scripts/script.js"></script>
 </body>
