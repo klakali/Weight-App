@@ -1,0 +1,50 @@
+$main-font: 'Asap',
+sans-serif;
+$font-color: #666666;
+$font-color-special: #787878;
+$background: #EDD7C8;
+$middle-place: 0 auto;
+
+@mixin margin-auto {
+    margin: 0 auto;
+    width: 70%;
+
+    @media #{$sixhundred} {
+        width: 80%;
+    }
+
+    @media #{$fivehundred} {
+        width: 90%;
+    }
+}
+
+@mixin fontStyle {
+    font-family: $main-font;
+    color: #fff;
+}
+
+@mixin formStyle {
+    @include fontStyle;
+    background-color: $font-color-special;
+}
+
+@mixin writeWeightStyle {
+    width: 4.5rem;
+    padding: 0.3rem;
+}
+
+@mixin moreMixin {
+    font-size: 1rem;
+    text-decoration: underline;
+    padding-bottom: 1rem;
+}
+
+@mixin resultsStyle {
+    padding: 1rem 0.8rem 1rem 0;
+    letter-spacing: 0.09rem;
+}
+
+// Media queries //
+
+$sixhundred: "(max-width: 600px)";
+$fivehundred: "(max-width: 500px)";

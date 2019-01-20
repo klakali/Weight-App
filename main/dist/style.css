@@ -1,0 +1,271 @@
+/* http://meyerweb.com/eric/tools/css/reset/ 
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline; }
+
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+  display: block; }
+
+body {
+  line-height: 1; }
+
+ol, ul {
+  list-style: none; }
+
+blockquote, q {
+  quotes: none; }
+
+blockquote:before, blockquote:after,
+q:before, q:after {
+  content: '';
+  content: none; }
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0; }
+
+body {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  width: 100%;
+  background-color: #EDD7C8;
+  font-family: "Asap", sans-serif;
+  font-size: 1.5rem;
+  color: #666666; }
+  @media (max-width: 600px) {
+    body {
+      font-size: 1.2rem; } }
+  @media (max-width: 500px) {
+    body {
+      font-size: 1rem; } }
+
+.welcome {
+  margin: 0 auto;
+  width: 70%;
+  padding: 2rem 0 2rem 0; }
+  @media (max-width: 600px) {
+    .welcome {
+      width: 80%; } }
+  @media (max-width: 500px) {
+    .welcome {
+      width: 90%; } }
+
+.welcome__welcomeText {
+  font-size: 4rem;
+  padding-bottom: 1.5rem;
+  font-weight: 600; }
+  @media (max-width: 600px) {
+    .welcome__welcomeText {
+      font-size: 3rem; } }
+  @media (max-width: 500px) {
+    .welcome__welcomeText {
+      font-size: 2.5rem; } }
+
+.welcome__motivationalText {
+  font-style: italic;
+  font-weight: 500;
+  font-size: 2rem;
+  color: #787878; }
+  @media (max-width: 500px) {
+    .welcome__motivationalText {
+      font-size: 1.5rem; } }
+
+.todaysWeight {
+  margin: 0 auto;
+  width: 70%;
+  padding: 1rem 0;
+  display: flex; }
+  @media (max-width: 600px) {
+    .todaysWeight {
+      width: 80%; } }
+  @media (max-width: 500px) {
+    .todaysWeight {
+      width: 90%; } }
+
+.todaysWeight__addWeightText {
+  padding-right: 2rem; }
+
+.todaysWeight__writeWeight {
+  width: 4.5rem;
+  padding: 0.3rem; }
+
+.todaysWeight__buttonAdd,
+.editWeight__buttonAdd {
+  font-family: "Asap", sans-serif;
+  color: #fff;
+  background-color: #787878; }
+
+.todaysWeight__buttonAdd:hover {
+  font-weight: 600;
+  cursor: pointer; }
+
+.weightResult {
+  margin: 0 auto;
+  width: 70%;
+  display: flex;
+  padding: 1rem 0; }
+  @media (max-width: 600px) {
+    .weightResult {
+      width: 80%; } }
+  @media (max-width: 500px) {
+    .weightResult {
+      width: 90%; } }
+
+.weightResult__average {
+  color: #787878;
+  font-weight: 600; }
+
+.weightGraph {
+  margin: 0 auto;
+  width: 70%;
+  margin-bottom: 1rem;
+  border: 1px solid #666666;
+  height: 30rem; }
+  @media (max-width: 600px) {
+    .weightGraph {
+      width: 80%; } }
+  @media (max-width: 500px) {
+    .weightGraph {
+      width: 90%; } }
+
+.moreResults {
+  display: flex;
+  align-items: flex-end;
+  flex-direction: column;
+  margin: 0 auto;
+  width: 70%; }
+  @media (max-width: 600px) {
+    .moreResults {
+      width: 80%; } }
+  @media (max-width: 500px) {
+    .moreResults {
+      width: 90%; } }
+
+.previousWeight__form {
+  padding-bottom: 1rem;
+  display: none; }
+
+.previousWeight__buttonAdd {
+  font-family: "Asap", sans-serif;
+  color: #fff;
+  background-color: #787878; }
+
+.previousWeight__writeWeight,
+.editWeight__writeWeight {
+  width: 4.5rem;
+  padding: 0.3rem; }
+
+.moreResults_viewMore {
+  font-size: 1rem;
+  text-decoration: underline;
+  padding-bottom: 1rem; }
+
+.previousWeight__dateWeight,
+.editWeight__dateWeight {
+  padding: 0.17rem; }
+
+.moreResults_viewMore:hover {
+  cursor: pointer; }
+
+.moreResults__addprevious {
+  font-size: 1rem;
+  text-decoration: underline;
+  padding-bottom: 1rem; }
+
+.moreResults__addprevious:hover {
+  cursor: pointer; }
+
+.allResults {
+  display: none; }
+
+.allResults__groupResults {
+  display: flex;
+  justify-content: flex-end;
+  width: 100%; }
+  @media (max-width: 600px) {
+    .allResults__groupResults {
+      display: flex;
+      flex-wrap: wrap;
+      padding: 0.5rem 0; } }
+
+.allResults__results {
+  padding: 1rem 0.8rem 1rem 0;
+  letter-spacing: 0.09rem; }
+
+.allResults__resultRemove,
+.allResults__resultEdit {
+  padding: 1rem 0.8rem 1rem 0;
+  letter-spacing: 0.09rem;
+  text-decoration: underline; }
+
+.allResults__resultRemove,
+.allResults__resultEdit:last-child {
+  padding: 1rem 0rem 1rem 0;
+  letter-spacing: 0.09rem; }
+
+.allResults__resultEdit,
+.allResults__resultRemove:hover {
+  cursor: pointer; }
+
+.editWeight__form {
+  padding-left: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center; }
+  @media (max-width: 600px) {
+    .editWeight__form {
+      display: flex;
+      flex-wrap: wrap;
+      padding: 0.5rem 0;
+      justify-content: flex-end; } }
+
+.editWeight__buttonAdd {
+  font-family: "Asap", sans-serif;
+  color: #fff;
+  background-color: #787878; }
+
+.loginArea {
+  margin: 0 auto;
+  width: 70%; }
+  @media (max-width: 600px) {
+    .loginArea {
+      width: 80%; } }
+  @media (max-width: 500px) {
+    .loginArea {
+      width: 90%; } }
+
+.loginArea__button {
+  font-family: "Asap", sans-serif;
+  color: #fff;
+  font-weight: 600;
+  padding: 1rem;
+  border: 1px solid #666666; }
+
+.loginArea__button:hover {
+  background-color: #787878;
+  cursor: pointer;
+  -webkit-transform: scale(1.04); }
+
+/*# sourceMappingURL=style.css.map */

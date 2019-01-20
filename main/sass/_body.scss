@@ -1,0 +1,224 @@
+body {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    width: 100%;
+    background-color: $background;
+    font-family: $main-font;
+    font-size: 1.5rem;
+    color: $font-color;
+
+    @media #{$sixhundred} {
+        font-size: 1.2rem;
+    }
+
+    @media #{$fivehundred} {
+        font-size: 1rem;
+    }
+}
+
+// Header welcome //
+.welcome {
+    @include margin-auto;
+    padding: 2rem 0 2rem 0;
+}
+
+.welcome__welcomeText {
+    font-size: 4rem;
+    padding-bottom: 1.5rem;
+    font-weight: 600;
+
+    @media #{$sixhundred} {
+        font-size: 3rem;
+    }
+
+    @media #{$fivehundred} {
+        font-size: 2.5rem;
+    }
+}
+
+.welcome__motivationalText {
+    font-style: italic;
+    font-weight: 500;
+    font-size: 2rem;
+    color: $font-color-special;
+
+    @media #{$fivehundred} {
+        font-size: 1.5rem;
+    }
+}
+
+// END Header welcome //
+
+// Weight today //
+.todaysWeight {
+    @include margin-auto;
+    padding: 1rem 0;
+    display: flex;
+}
+
+.todaysWeight__addWeightText {
+    padding-right: 2rem;
+}
+
+.todaysWeight__writeWeight {
+    @include writeWeightStyle;
+}
+
+.todaysWeight__buttonAdd,
+.editWeight__buttonAdd {
+    @include formStyle;
+}
+
+.todaysWeight__buttonAdd:hover {
+    font-weight: 600;
+    cursor: pointer;
+}
+
+// END Weight today //
+
+// Weight Result //
+.weightResult {
+    @include margin-auto;
+    display: flex;
+    padding: 1rem 0;
+}
+
+.weightResult__average {
+    color: $font-color-special;
+    font-weight: 600;
+}
+
+// END Weight Result //
+
+// Weight Graph //
+.weightGraph {
+    @include margin-auto;
+    margin-bottom: 1rem;
+    border: 1px solid #666666;
+    height: 30rem;
+}
+
+// END Weight Graph //
+
+// More results //
+.moreResults {
+    display: flex;
+    align-items: flex-end;
+    flex-direction: column;
+    @include margin-auto;
+}
+
+.previousWeight__form {
+    padding-bottom: 1rem;
+    display: none;
+}
+
+.previousWeight__buttonAdd {
+    @include formStyle;
+}
+
+.previousWeight__writeWeight,
+.editWeight__writeWeight {
+    @include writeWeightStyle;
+}
+
+.moreResults_viewMore {
+    @include moreMixin;
+}
+
+.previousWeight__dateWeight,
+.editWeight__dateWeight {
+    padding: 0.17rem;
+}
+
+.moreResults_viewMore:hover {
+    cursor: pointer;
+}
+
+.moreResults__addprevious {
+    @include moreMixin;
+}
+
+.moreResults__addprevious:hover {
+    cursor: pointer;
+}
+
+.allResults {
+   display: none;
+}
+
+.allResults__groupResults {
+    display: flex;
+    justify-content: flex-end;
+    width: 100%;
+
+    @media #{$sixhundred} {
+        display: flex;
+        flex-wrap: wrap;
+        padding: 0.5rem 0;
+    }
+}
+
+.allResults__results {
+    @include resultsStyle;
+}
+
+.allResults__resultRemove,
+.allResults__resultEdit {
+    @include resultsStyle;
+    text-decoration: underline;
+}
+
+.allResults__resultRemove,
+.allResults__resultEdit:last-child {
+    padding: 1rem 0rem 1rem 0;
+    letter-spacing: 0.09rem;
+}
+
+.allResults__resultEdit,
+.allResults__resultRemove:hover {
+    cursor: pointer;
+}
+
+// END More results //
+
+// Edit & remove //
+.editWeight__form {
+    padding-left: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    @media #{$sixhundred} {
+        display: flex;
+        flex-wrap: wrap;
+        padding: 0.5rem 0;
+        justify-content: flex-end;
+    }
+}
+
+.editWeight__buttonAdd {
+    @include formStyle;
+}
+
+// END Edit & remove //
+
+//Login page//
+.loginArea {
+    @include margin-auto;
+}
+
+.loginArea__button {
+    @include fontStyle;;
+    font-weight: 600;
+    padding: 1rem;
+    border: 1px solid #666666;
+}
+.loginArea__button:hover {
+    background-color: $font-color-special;
+    cursor: pointer;
+    -webkit-transform: scale(1.04);     
+}
+
+//End Login page//
