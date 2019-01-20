@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weight App</title>
+    <meta name="description" content="Track the weight">
+    <meta name="author" content="klakali">
+    <link href="https://fonts.googleapis.com/css?family=Asap:400,500i,600" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="dist/style.css">
+
+    <!-- update the version number as needed -->
+    <script defer src="/__/firebase/5.7.1/firebase-app.js"></script>
+    <!-- include only the Firebase features as you need -->
+    <script defer src="/__/firebase/5.7.1/firebase-auth.js"></script>
+    <script defer src="/__/firebase/5.7.1/firebase-database.js"></script>
+    <!-- initialize the SDK after all desired features are loaded -->
+    <script defer src="/__/firebase/init.js"></script>
+</head>
+
+<body>
+    <header class="welcome">
+        <h1 class="welcome__welcomeText">Hello, Andrzej.</h1>
+        <h2 class="welcome__motivationalText"></h2>
+    </header>
+
+    <section class="todaysWeight">
+        <h3 class="todaysWeight__addWeightText">Today's results:</h3>
+        <form>
+            <input class="todaysWeight__writeWeight" type="text" placeholder="Weight...">
+            <input class="todaysWeight__buttonAdd" type="button" value="Add">
+        </form>
+    </section>
+
+    <section class="weightResult">
+        <p>Average weight from 30 days: <span class="weightResult__average">75</span> kg</p>
+    </section>
+
+    <!--  <canvas class="weightGraph"></canvas> -->
+
+    <section class="moreResults">
+        <!--     <p class="moreResults__addprevious">Add previous results</p>
+        <form class="previousWeight__form">
+            <input class="previousWeight__writeWeight" type="text" placeholder="Weight...">
+            <input class="previousWeight__dateWeight" type="date">
+            <input class="previousWeight__buttonAdd" type="button" value="Add">
+        </form>  -->
+        <p class="moreResults_viewMore">View more</p>
+        <div class="allResults"></div>
+    </section>
+
+    <script src="https://www.gstatic.com/firebasejs/5.7.1/firebase.js"></script>
+    <script>
+        // Initialize Firebase
+        var config = {
+            apiKey: "AIzaSyA_h1Zao0yy_OVUtewtZu6Idi3XgvsSo7c",
+            authDomain: "weightmonitorapp.firebaseapp.com",
+            databaseURL: "https://weightmonitorapp.firebaseio.com",
+            projectId: "weightmonitorapp",
+            storageBucket: "weightmonitorapp.appspot.com",
+            messagingSenderId: "228950937136"
+        };
+        firebase.initializeApp(config);
+        const db = firebase.firestore();
+        db.settings({
+            timestampsInSnapshots: true
+        });
+
+    </script>
+
+    <script src="scripts/textMotivtion.js"></script>
+    <script src="scripts/scriptuserdatabase.js"></script>
+</body>
+
+</html>
